@@ -1,0 +1,32 @@
+package WLCS_Types
+public
+with Data_Model, Base_Types, BLESS_Types, BLESS;
+
+Data ControlCommand
+
+end ControlCommand;
+
+Data ValveStatus
+end ValveStatus;
+
+Data WaterLevel
+properties
+BLESS::Typed => "real";
+Data_Model::Data_Representation => Float;
+end WaterLevel;
+
+Data SensorValue
+end SensorValue;
+
+Data Time
+end Time;
+
+
+data on_off
+  properties
+  Data_Model::Data_Representation => Enum;
+  Data_Model::Enumerators => ("Off","On");
+  BLESS::Typed => "enumeration (Off, On)";
+end on_off;
+
+end WLCS_Types;

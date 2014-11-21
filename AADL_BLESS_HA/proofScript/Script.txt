@@ -1,0 +1,104 @@
+load
+make-an
+#WLCS::Controller.impl
+#[serial 1003] <<M(FILL)>> -> <<I>> from invariant I when complete state FILL has Assertion <<M(FILL)>> in its definition.
+axioms
+#[serial 1004] <<M(DRAIN)>> -> <<I>> from invariant I when complete state DRAIN has Assertion <<M(DRAIN)>> in its definition.
+axioms
+#[serial 1005] Serban's Theorem:  disjunction of execute conditions leaving execution state CHECK_FILL, <<M(CHECK_FILL)>> -> <<e1 or e2 or . . . en>>
+completesub
+axioms
+#[serial 1006] Serban's Theorem:  disjunction of execute conditions leaving execution state CHECK_DRAIN, <<M(CHECK_DRAIN)>> -> <<e1 or e2 or . . . en>>
+completesub
+axioms
+#[serial 1007]  <<M(START) and x>> A <<M(DRAIN)>> for T0_start:START-[x]->DRAIN{A};
+axioms
+reduce
+axioms
+atomic
+now
+completesub
+axioms
+laws
+axioms
+normalize
+axioms
+#[serial 1008]  <<M(START) and x>> A <<M(FILL)>> for T1_start:START-[x]->FILL{A};
+reduce
+axioms
+atomic
+normalize
+laws
+normalize
+axioms
+now
+completesub
+axioms
+#[serial 1009]  <<M(START) and x>> A <<M(DRAIN)>> for T2_start:START-[x]->DRAIN{A};
+axioms
+reduce
+axioms
+atomic
+now
+completesub
+laws
+axioms
+normalize
+split-post
+axioms
+normalize
+axioms
+#[serial 1010]  <<M(FILL) and x>> -> <<M(CHECK_FILL)>> for T3_check_fill:FILL-[x]->CHECK_FILL{};
+axioms
+#[serial 1011]  <<M(CHECK_FILL) and x>> A <<M(FILL)>> for T4_fill_ok:CHECK_FILL-[x]->FILL{A};
+axioms
+reduce
+axioms
+atomic
+now
+completesub
+laws
+axioms
+#[serial 1012]  <<M(CHECK_FILL) and x>> A <<M(DRAIN)>> for T5_fill_out:CHECK_FILL-[x]->DRAIN{A};
+axioms
+reduce
+axioms
+atomic
+normalize
+now
+completesub
+axioms
+laws
+normalize
+axioms
+#[serial 1013]  <<M(DRAIN) and x>> -> <<M(CHECK_DRAIN)>> for T6_check_drain:DRAIN-[x]->CHECK_DRAIN{};
+axioms
+axioms
+#[serial 1014]  <<M(CHECK_DRAIN) and x>> A <<M(DRAIN)>> for T7_drain_ok:CHECK_DRAIN-[x]->DRAIN{A};
+reduce
+axioms
+atomic
+now
+normalize
+axioms
+completesub
+laws
+split-post
+axioms
+#[serial 1015]  <<M(CHECK_DRAIN) and x>> A <<M(FILL)>> for T8_drain_out:CHECK_DRAIN-[x]->FILL{A};
+axioms
+reduce
+axioms
+atomic
+now
+normalize
+laws
+completesub
+axioms
+#[serial 1016]  <<M(CHECK_FILL) and x>> -> <<M(OVER_FLOW)>> for T9_overflow:CHECK_FILL-[x]->OVER_FLOW{};
+axioms
+completesub
+axioms
+#[serial 1017]  <<M(CHECK_DRAIN) and x>> -> <<M(UNDER_FLOW)>> for T10_underflow:CHECK_DRAIN-[x]->UNDER_FLOW{};
+completesub
+axioms

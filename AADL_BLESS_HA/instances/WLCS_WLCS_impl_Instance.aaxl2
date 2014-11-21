@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="ASCII"?>
+<instance:SystemInstance xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aadl2="http://aadl.info/AADL/2.0" xmlns:instance="http://aadl.info/AADL/2.0/instance" xmi:id="_NU1CgGJ8EeSydoAr15BT1g" name="WLCS_impl_Instance" category="system">
+  <componentInstance xmi:id="_NU7wMGJ8EeSydoAr15BT1g" name="WaterTank">
+    <featureInstance xmi:id="_NU8-UGJ8EeSydoAr15BT1g" name="wl" srcConnectionInstance="_NVETEGJ8EeSydoAr15BT1g" direction="out">
+      <ownedPropertyAssociation xmi:id="_NVZDMGJ8EeSydoAr15BT1g">
+        <property href="../../Plugin_Resources/BLESS.aadl#BLESS.Typed"/>
+        <ownedValue xmi:id="_NVZDMWJ8EeSydoAr15BT1g">
+          <ownedValue xsi:type="aadl2:StringLiteral" xmi:id="_NVZDMmJ8EeSydoAr15BT1g" value="real"/>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <ownedPropertyAssociation xmi:id="_NVZDM2J8EeSydoAr15BT1g">
+        <property href="../../Plugin_Resources/Data_Model.aadl#Data_Model.Data_Representation"/>
+        <ownedValue xmi:id="_NVZDNGJ8EeSydoAr15BT1g">
+          <ownedValue xsi:type="aadl2:NamedValue" xmi:id="_NVZDNWJ8EeSydoAr15BT1g">
+            <namedValue xsi:type="aadl2:EnumerationLiteral" href="../../Plugin_Resources/Data_Model.aadl#//@ownedProperty.4/@ownedPropertyType/@ownedLiteral.4"/>
+          </ownedValue>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <feature xsi:type="aadl2:DataPort" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.6/@ownedDataPort.0"/>
+    </featureInstance>
+    <featureInstance xmi:id="_NU-McGJ8EeSydoAr15BT1g" name="ac" dstConnectionInstance="_NVFhMGJ8EeSydoAr15BT1g" category="eventDataPort">
+      <feature xsi:type="aadl2:EventDataPort" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.6/@ownedEventDataPort.0"/>
+    </featureInstance>
+    <subcomponent xsi:type="aadl2:AbstractSubcomponent" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.1/@ownedAbstractSubcomponent.0"/>
+    <index>0</index>
+  </componentInstance>
+  <componentInstance xmi:id="_NU-McWJ8EeSydoAr15BT1g" name="Actuator" category="device">
+    <featureInstance xmi:id="_NU_akGJ8EeSydoAr15BT1g" name="cc" dstConnectionInstance="_NVJyoGJ8EeSydoAr15BT1g" category="eventDataPort">
+      <ownedPropertyAssociation xmi:id="_NVbfcGJ8EeSydoAr15BT1g">
+        <property href="../../Plugin_Resources/BLESS.aadl#BLESS.Typed"/>
+        <ownedValue xmi:id="_NVbfcWJ8EeSydoAr15BT1g">
+          <ownedValue xsi:type="aadl2:StringLiteral" xmi:id="_NVbfcmJ8EeSydoAr15BT1g" value="enumeration (Off, On)"/>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <ownedPropertyAssociation xmi:id="_NVcGgGJ8EeSydoAr15BT1g">
+        <property href="../../Plugin_Resources/Data_Model.aadl#Data_Model.Data_Representation"/>
+        <ownedValue xmi:id="_NVcGgWJ8EeSydoAr15BT1g">
+          <ownedValue xsi:type="aadl2:NamedValue" xmi:id="_NVcGgmJ8EeSydoAr15BT1g">
+            <namedValue xsi:type="aadl2:EnumerationLiteral" href="../../Plugin_Resources/Data_Model.aadl#//@ownedProperty.4/@ownedPropertyType/@ownedLiteral.3"/>
+          </ownedValue>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <ownedPropertyAssociation xmi:id="_NVcGg2J8EeSydoAr15BT1g">
+        <property href="../../Plugin_Resources/Data_Model.aadl#Data_Model.Enumerators"/>
+        <ownedValue xmi:id="_NVcGhGJ8EeSydoAr15BT1g">
+          <ownedValue xsi:type="aadl2:ListValue" xmi:id="_NVcGhWJ8EeSydoAr15BT1g">
+            <ownedListElement xsi:type="aadl2:StringLiteral" xmi:id="_NVcGhmJ8EeSydoAr15BT1g" value="Off"/>
+            <ownedListElement xsi:type="aadl2:StringLiteral" xmi:id="_NVcGh2J8EeSydoAr15BT1g" value="On"/>
+          </ownedValue>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <feature xsi:type="aadl2:EventDataPort" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.8/@ownedEventDataPort.0"/>
+    </featureInstance>
+    <featureInstance xmi:id="_NU_akWJ8EeSydoAr15BT1g" name="ac" srcConnectionInstance="_NVFhMGJ8EeSydoAr15BT1g" category="eventDataPort" direction="out">
+      <feature xsi:type="aadl2:EventDataPort" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.8/@ownedEventDataPort.1"/>
+    </featureInstance>
+    <subcomponent xsi:type="aadl2:DeviceSubcomponent" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.1/@ownedDeviceSubcomponent.0"/>
+    <index>0</index>
+  </componentInstance>
+  <componentInstance xmi:id="_NU_akmJ8EeSydoAr15BT1g" name="Sensor" category="device">
+    <featureInstance xmi:id="_NVABoGJ8EeSydoAr15BT1g" name="wl" dstConnectionInstance="_NVETEGJ8EeSydoAr15BT1g">
+      <ownedPropertyAssociation xmi:id="_NVeiwGJ8EeSydoAr15BT1g">
+        <property href="../../Plugin_Resources/BLESS.aadl#BLESS.Typed"/>
+        <ownedValue xmi:id="_NVeiwWJ8EeSydoAr15BT1g">
+          <ownedValue xsi:type="aadl2:StringLiteral" xmi:id="_NVZDMmJ8EeSydoAr15BT1g" value="real"/>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <ownedPropertyAssociation xmi:id="_NVeiwmJ8EeSydoAr15BT1g">
+        <property href="../../Plugin_Resources/Data_Model.aadl#Data_Model.Data_Representation"/>
+        <ownedValue xmi:id="_NVeiw2J8EeSydoAr15BT1g">
+          <ownedValue xsi:type="aadl2:NamedValue" xmi:id="_NVeixGJ8EeSydoAr15BT1g">
+            <namedValue xsi:type="aadl2:EnumerationLiteral" href="../../Plugin_Resources/Data_Model.aadl#//@ownedProperty.4/@ownedPropertyType/@ownedLiteral.4"/>
+          </ownedValue>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <feature xsi:type="aadl2:DataPort" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.0"/>
+    </featureInstance>
+    <featureInstance xmi:id="_NVAosGJ8EeSydoAr15BT1g" name="sw" srcConnectionInstance="_NVIkgGJ8EeSydoAr15BT1g" direction="out">
+      <feature xsi:type="aadl2:DataPort" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.1"/>
+    </featureInstance>
+    <subcomponent xsi:type="aadl2:DeviceSubcomponent" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.1/@ownedDeviceSubcomponent.1"/>
+    <index>0</index>
+  </componentInstance>
+  <componentInstance xmi:id="_NVAosWJ8EeSydoAr15BT1g" name="pController" category="process">
+    <featureInstance xmi:id="_NVCd4WJ8EeSydoAr15BT1g" name="sw">
+      <feature xsi:type="aadl2:DataPort" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.2/@ownedDataPort.0"/>
+    </featureInstance>
+    <featureInstance xmi:id="_NVCd4mJ8EeSydoAr15BT1g" name="cc" category="eventDataPort" direction="out">
+      <ownedPropertyAssociation xmi:id="_NVg_AGJ8EeSydoAr15BT1g">
+        <property href="../../Plugin_Resources/BLESS.aadl#BLESS.Typed"/>
+        <ownedValue xmi:id="_NVg_AWJ8EeSydoAr15BT1g">
+          <ownedValue xsi:type="aadl2:StringLiteral" xmi:id="_NVbfcmJ8EeSydoAr15BT1g" value="enumeration (Off, On)"/>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <ownedPropertyAssociation xmi:id="_NVhmEGJ8EeSydoAr15BT1g">
+        <property href="../../Plugin_Resources/Data_Model.aadl#Data_Model.Data_Representation"/>
+        <ownedValue xmi:id="_NVhmEWJ8EeSydoAr15BT1g">
+          <ownedValue xsi:type="aadl2:NamedValue" xmi:id="_NVhmEmJ8EeSydoAr15BT1g">
+            <namedValue xsi:type="aadl2:EnumerationLiteral" href="../../Plugin_Resources/Data_Model.aadl#//@ownedProperty.4/@ownedPropertyType/@ownedLiteral.3"/>
+          </ownedValue>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <ownedPropertyAssociation xmi:id="_NVhmE2J8EeSydoAr15BT1g">
+        <property href="../../Plugin_Resources/Data_Model.aadl#Data_Model.Enumerators"/>
+        <ownedValue xmi:id="_NVhmFGJ8EeSydoAr15BT1g">
+          <ownedValue xsi:type="aadl2:ListValue" xmi:id="_NVcGhWJ8EeSydoAr15BT1g">
+            <ownedListElement xsi:type="aadl2:StringLiteral" xmi:id="_NVcGhmJ8EeSydoAr15BT1g" value="Off"/>
+            <ownedListElement xsi:type="aadl2:StringLiteral" xmi:id="_NVcGh2J8EeSydoAr15BT1g" value="On"/>
+          </ownedValue>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <feature xsi:type="aadl2:EventDataPort" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.2/@ownedEventDataPort.0"/>
+    </featureInstance>
+    <componentInstance xmi:id="_NVBPwGJ8EeSydoAr15BT1g" name="Controller" category="thread">
+      <ownedPropertyAssociation xmi:id="_NVi0MGJ8EeSydoAr15BT1g">
+        <property href="../../Plugin_Resources/Thread_Properties.aadl#Thread_Properties.Dispatch_Protocol"/>
+        <ownedValue xmi:id="_NVi0MWJ8EeSydoAr15BT1g">
+          <ownedValue xsi:type="aadl2:NamedValue" xmi:id="_NVi0MmJ8EeSydoAr15BT1g">
+            <namedValue xsi:type="aadl2:EnumerationLiteral" href="../../Plugin_Resources/AADL_Project.aadl#//@ownedPropertyType.3/@ownedLiteral.4"/>
+          </ownedValue>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <ownedPropertyAssociation xmi:id="_NVjbQGJ8EeSydoAr15BT1g">
+        <property href="../../Plugin_Resources/Timing_Properties.aadl#Timing_Properties.Period"/>
+        <ownedValue xmi:id="_NVjbQWJ8EeSydoAr15BT1g">
+          <ownedValue xsi:type="aadl2:IntegerLiteral" xmi:id="_NVkCUGJ8EeSydoAr15BT1g" value="100">
+            <unit href="../../Plugin_Resources/AADL_Project.aadl#//@ownedPropertyType.12/@ownedLiteral.3"/>
+          </ownedValue>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <featureInstance xmi:id="_NVB20GJ8EeSydoAr15BT1g" name="sw" dstConnectionInstance="_NVIkgGJ8EeSydoAr15BT1g">
+        <feature xsi:type="aadl2:DataPort" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.4/@ownedDataPort.0"/>
+      </featureInstance>
+      <featureInstance xmi:id="_NVCd4GJ8EeSydoAr15BT1g" name="cc" srcConnectionInstance="_NVJyoGJ8EeSydoAr15BT1g" category="eventDataPort" direction="out">
+        <ownedPropertyAssociation xmi:id="_NVkpYGJ8EeSydoAr15BT1g">
+          <property href="../../Plugin_Resources/BLESS.aadl#BLESS.Typed"/>
+          <ownedValue xmi:id="_NVkpYWJ8EeSydoAr15BT1g">
+            <ownedValue xsi:type="aadl2:StringLiteral" xmi:id="_NVbfcmJ8EeSydoAr15BT1g" value="enumeration (Off, On)"/>
+          </ownedValue>
+        </ownedPropertyAssociation>
+        <ownedPropertyAssociation xmi:id="_NVkpYmJ8EeSydoAr15BT1g">
+          <property href="../../Plugin_Resources/Data_Model.aadl#Data_Model.Data_Representation"/>
+          <ownedValue xmi:id="_NVkpY2J8EeSydoAr15BT1g">
+            <ownedValue xsi:type="aadl2:NamedValue" xmi:id="_NVkpZGJ8EeSydoAr15BT1g">
+              <namedValue xsi:type="aadl2:EnumerationLiteral" href="../../Plugin_Resources/Data_Model.aadl#//@ownedProperty.4/@ownedPropertyType/@ownedLiteral.3"/>
+            </ownedValue>
+          </ownedValue>
+        </ownedPropertyAssociation>
+        <ownedPropertyAssociation xmi:id="_NVkpZWJ8EeSydoAr15BT1g">
+          <property href="../../Plugin_Resources/Data_Model.aadl#Data_Model.Enumerators"/>
+          <ownedValue xmi:id="_NVlQcGJ8EeSydoAr15BT1g">
+            <ownedValue xsi:type="aadl2:ListValue" xmi:id="_NVcGhWJ8EeSydoAr15BT1g">
+              <ownedListElement xsi:type="aadl2:StringLiteral" xmi:id="_NVcGhmJ8EeSydoAr15BT1g" value="Off"/>
+              <ownedListElement xsi:type="aadl2:StringLiteral" xmi:id="_NVcGh2J8EeSydoAr15BT1g" value="On"/>
+            </ownedValue>
+          </ownedValue>
+        </ownedPropertyAssociation>
+        <ownedPropertyAssociation xmi:id="_NVlQcWJ8EeSydoAr15BT1g">
+          <property href="../../Plugin_Resources/BLESS.aadl#BLESS.Assertion"/>
+          <ownedValue xmi:id="_NVlQcmJ8EeSydoAr15BT1g">
+            <ownedValue xsi:type="aadl2:StringLiteral" xmi:id="_NVlQc2J8EeSydoAr15BT1g" value="&lt;&lt;:=COMMAND()>>"/>
+          </ownedValue>
+        </ownedPropertyAssociation>
+        <feature xsi:type="aadl2:EventDataPort" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.4/@ownedEventDataPort.0"/>
+      </featureInstance>
+      <subcomponent xsi:type="aadl2:ThreadSubcomponent" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.3/@ownedThreadSubcomponent.0"/>
+      <index>0</index>
+    </componentInstance>
+    <subcomponent xsi:type="aadl2:ProcessSubcomponent" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.0"/>
+    <index>0</index>
+  </componentInstance>
+  <connectionInstance xmi:id="_NVETEGJ8EeSydoAr15BT1g" name="WaterTank.wl -> Sensor.wl" complete="true" kind="portConnection" destination="_NVABoGJ8EeSydoAr15BT1g" source="_NU8-UGJ8EeSydoAr15BT1g">
+    <connectionReference xmi:id="_NVETEWJ8EeSydoAr15BT1g" context="_NU1CgGJ8EeSydoAr15BT1g" source="_NU8-UGJ8EeSydoAr15BT1g" destination="_NVABoGJ8EeSydoAr15BT1g">
+      <connection xsi:type="aadl2:PortConnection" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.1/@ownedPortConnection.2"/>
+    </connectionReference>
+  </connectionInstance>
+  <connectionInstance xmi:id="_NVFhMGJ8EeSydoAr15BT1g" name="Actuator.ac -> WaterTank.ac" complete="true" kind="portConnection" destination="_NU-McGJ8EeSydoAr15BT1g" source="_NU_akWJ8EeSydoAr15BT1g">
+    <connectionReference xmi:id="_NVFhMWJ8EeSydoAr15BT1g" context="_NU1CgGJ8EeSydoAr15BT1g" source="_NU_akWJ8EeSydoAr15BT1g" destination="_NU-McGJ8EeSydoAr15BT1g">
+      <connection xsi:type="aadl2:PortConnection" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.1/@ownedPortConnection.1"/>
+    </connectionReference>
+  </connectionInstance>
+  <connectionInstance xmi:id="_NVIkgGJ8EeSydoAr15BT1g" name="Sensor.sw -> pController.Controller.sw" complete="true" kind="portConnection" destination="_NVB20GJ8EeSydoAr15BT1g" source="_NVAosGJ8EeSydoAr15BT1g">
+    <connectionReference xmi:id="_NVIkgWJ8EeSydoAr15BT1g" context="_NU1CgGJ8EeSydoAr15BT1g" source="_NVAosGJ8EeSydoAr15BT1g" destination="_NVCd4WJ8EeSydoAr15BT1g">
+      <connection xsi:type="aadl2:PortConnection" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.1/@ownedPortConnection.3"/>
+    </connectionReference>
+    <connectionReference xmi:id="_NVIkgmJ8EeSydoAr15BT1g" context="_NVAosWJ8EeSydoAr15BT1g" source="_NVCd4WJ8EeSydoAr15BT1g" destination="_NVB20GJ8EeSydoAr15BT1g">
+      <connection xsi:type="aadl2:PortConnection" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.3/@ownedPortConnection.0"/>
+    </connectionReference>
+  </connectionInstance>
+  <connectionInstance xmi:id="_NVJyoGJ8EeSydoAr15BT1g" name="pController.Controller.cc -> Actuator.cc" complete="true" kind="portConnection" destination="_NU_akGJ8EeSydoAr15BT1g" source="_NVCd4GJ8EeSydoAr15BT1g">
+    <connectionReference xmi:id="_NVJyoWJ8EeSydoAr15BT1g" context="_NVAosWJ8EeSydoAr15BT1g" source="_NVCd4GJ8EeSydoAr15BT1g" destination="_NVCd4mJ8EeSydoAr15BT1g">
+      <connection xsi:type="aadl2:PortConnection" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.3/@ownedPortConnection.1"/>
+    </connectionReference>
+    <connectionReference xmi:id="_NVJyomJ8EeSydoAr15BT1g" context="_NU1CgGJ8EeSydoAr15BT1g" source="_NVCd4mJ8EeSydoAr15BT1g" destination="_NU_akGJ8EeSydoAr15BT1g">
+      <connection xsi:type="aadl2:PortConnection" href="../packages/WLCS.aadl#//@ownedPublicSection/@ownedClassifier.1/@ownedPortConnection.0"/>
+    </connectionReference>
+  </connectionInstance>
+  <systemOperationMode xmi:id="_NVDE8GJ8EeSydoAr15BT1g" name="No Modes"/>
+  <systemImplementation href="../packages/WLCS.aadl#WLCS.WLCS.impl"/>
+</instance:SystemInstance>

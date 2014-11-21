@@ -1,0 +1,186 @@
+--*****************************************************READ ME************************************************
+
+---Modeling of the Water Level Control System (WLCS)--a benchmark hybrid system
+---The goal is to keep the water level (ws) between the lower desired limit (30) and the upper desired limit (60)
+---Assumptions:
+	-- 1) if the inflow valve is on at a particular time (t), water inflow is greater than water outflow
+	
+	
+--*************************************************************************************************************	
+package WLCS
+public
+with WLCS_Types, BLESS, BLESS_Types, Base_Types;	
+-----------------WLCS system----------------
+system WLCS
+end WLCS;
+
+system implementation WLCS.impl
+subcomponents
+Actuator : device Actuator.impl;
+Sensor : device Sensor.impl;
+pController : process pController.impl;
+WaterTank : abstract WaterTank.impl;
+
+connections
+C2A : port pController.cc -> Actuator.cc; --Controller to Actuator
+A2W : port Actuator.ac -> WaterTank.ac;  --Actuator to WaterTank
+W2S : port WaterTank.wl -> Sensor.wl;   -- WaterTank to Sensor
+S2C : port Sensor.sw -> pController.sw;  --WaterTank to pController
+ 
+end WLCS.impl;
+
+-------------------Controller Process-----------------
+process pController
+features
+sw : in data port WLCS_Types::SensorValue ;
+cc : out event data port WLCS_Types::on_off;
+end pController;
+
+process implementation pController.impl
+
+subcomponents
+Controller : thread Controller.impl;
+
+connections
+C1 :   port sw -> Controller.sw;
+C2 :   port Controller.cc -> cc;
+end pController.impl;
+	
+--------Controller Thread with BLESS specification--------------	
+thread Controller
+features
+sw : in data port WLCS_Types::SensorValue;  --  {BLESS::Assertion=> "<<:=iH>>";};
+cc : out event data port WLCS_Types::on_off {BLESS::Assertion=> "<<:=COMMAND()>>";};
+
+properties
+Dispatch_Protocol => Hybrid;
+Period => 100 ms;
+end Controller;	
+	
+thread implementation Controller.impl
+annex BLESS{**
+ 
+ assert
+   <<UNDERFLOW: : sw<=29>>
+  <<OVERFLOW: : sw>=61>>
+  <<STAY_SAME: : (sw > 30) and (sw < 60)>> 
+  <<TURN_ON: : sw<=30>>
+  <<TURN_OFF: : sw>=60>>
+  
+  <<COMMAND: :=
+  (STAY_SAME() or TURN_ON() or TURN_OFF()) -> nc,   -- no change in valve status                                 			
+  (TURN_OFF()) -> Off,   --set the valve to off  
+  (TURN_ON()) -> On --set the valve to on     			
+   >> 
+
+	invariant
+	<<TURN_ON() or TURN_OFF() or STAY_SAME()>>
+	
+	variables
+	cv : WLCS_Types::on_off := Off; --  valve is on 
+	--offv: WLCS_Types::ValveStatus; -- off valve
+	--ncv : WLCS_Types::ValveStatus; -- no change vavle
+	--t : WLCS_Types::Time;
+	-- h : WLCS_Types::WaterLevel; --current water level
+	--ldl : WLCS_Types::WaterLevel; --lower desired limit
+	--udl : WLCS_Types::WaterLevel; --upper desired limit
+	
+	states
+	START : initial state <<cv=Off>>;
+	FILL : complete state <<cv=On and (TURN_ON() or STAY_SAME()) >>;  
+	DRAIN : complete state <<cv=Off and (TURN_OFF() or STAY_SAME())>>;  
+	CHECK_FILL : state <<cv=On and (TURN_ON() or STAY_SAME())>>; 
+	CHECK_DRAIN : state <<cv=Off and (TURN_OFF() or STAY_SAME())>>; 
+	OVER_FLOW  : final state <<OVERFLOW()>>; --Can a final state have assertions?
+	UNDER_FLOW  : final state <<UNDERFLOW()>>; --Can a final state have assertions?
+	
+	transitions
+	T0_start : START -[sw >= 60]-> DRAIN {cc!(Off); <<TURN_OFF()>> cv:=Off  <<cv=Off and (TURN_OFF() or STAY_SAME())>>}; --what is the value of sw at the start
+	T1_start : START -[sw <= 30]-> FILL {cc!(On); <<TURN_ON()>> cv:=On <<cv=On and (TURN_ON() or STAY_SAME())>>}; 
+	T2_start : START -[(sw > 30) and (sw < 60)]-> DRAIN {cc!(nc) <<cv=Off and (TURN_OFF() or STAY_SAME())>>};	                       
+	
+	T3_check_fill : FILL -[on dispatch]-> CHECK_FILL{}; --Does sw gets the new values each time is otherwise we have to get new value after every dispatch
+	T4_fill_ok : CHECK_FILL -[(cv = On) and (((sw > 30) and (sw < 60)) or (sw<=30))]-> FILL { cc!(nc) <<cv=On and (TURN_ON() or STAY_SAME())>>};
+	T5_fill_out : CHECK_FILL -[sw>=60]-> DRAIN {cc!(Off); <<TURN_OFF()>> cv:=Off  <<cv=Off and (TURN_OFF() or STAY_SAME())>>}; --Do we need to take care of Hysteresis effect 
+	
+	T6_check_drain :  DRAIN -[on dispatch]-> CHECK_DRAIN {};
+	T7_drain_ok :  CHECK_DRAIN -[(cv = Off) and (((sw > 30) and (sw < 60)) or (sw>=60))]-> DRAIN {cc!(nc) <<cv=Off and (TURN_OFF() or STAY_SAME())>>};
+	T8_drain_out : CHECK_DRAIN -[sw<=30]-> FILL {cc!(On); <<TURN_ON()>> cv:=On  <<cv=On and (TURN_ON() or STAY_SAME())>>}; 
+	
+	T9_overflow : CHECK_FILL -[sw>=61]-> OVER_FLOW {};	--No actions? if the it keeping filling in the check filling state, the inflow valve is out of order
+	T10_underflow : CHECK_DRAIN -[sw<=29]-> UNDER_FLOW {};	--No actions? if the it keeping draining in the check draining state, the inflow valve is out of order
+	
+**};
+end Controller.impl;
+	
+	------Water Tank with HA specification-------------
+
+abstract WaterTank
+features
+ac : in event data port WLCS_Types::ValveStatus;
+wl : out data port WLCS_Types::WaterLevel;
+end WaterTank;
+
+abstract implementation WaterTank.impl
+annex hybrid{**
+assert
+
+<<NORMAL: : h@now < (udl + WLCS_Properties::Tolerance)  and  h@now > (ldl - WLCS_Properties::Tolerance)>>
+
+--<<FILLING: : forall x:BLESS_Types::Time in 0.0 ,, now are
+--  (h@now - h@x) <= WLCS_Properties::Filling_Rate*(now - x)>>
+--<<Draining: : forall x:BLESS_Types::Time in 0.0 ,, now are
+-- 	(h@now - h@x) >= WLCS_Properties::Draining_Rate*(now - x)>>
+--Accuaracy
+--Rate of Change
+--Cummulative Effect
+ invariant
+ <<NORMAL() and FILLING() and DRAINING()>>
+ 
+variables
+ t : WLCS_Types::Time --value of current time
+ v : WLCS_Types::ValveStatus --inflow valve status
+ h : WLCS_Types::WaterLevel --current water level
+ x : BLESS_Types::Time
+constants
+Qmax = 0.007 cmps, --maximum water inflow
+g	 = 9.8 mpss, --gravitational force
+pi   = 3.14,    --mathematical ratio 
+r    =  0.0254 m, --radius of outflow valve
+u    =  1, --outflow valve status, permanently open
+sr =  0.01,  --sampling period
+udl = 60.0,  -- upper desired limit
+ldl = 30.0   -- lower desired limmit
+
+behavior  --check for shared variables, v is used in both Plant and GetCmd
+Plant ::= t:=0 & 
+		 'DT 1 h = (v*Qmax) - (pi * (r^2) * 1.414 * (g^0.5) * (h^0.5) * u)' &
+         'DT 1 v = 0' < [sr < 0.01] >  [[> wl!(h)]]> GetCmd 
+GetCmd ::= ac?(v)
+WaterTank ::= REPEAT(Plant)     
+
+**};
+
+end WaterTank.impl;
+
+-----------Actuator--------
+device Actuator
+features
+ cc : in event data port WLCS_Types::on_off;
+ ac : out event data port WLCS_Types::ValveStatus; 
+end actuator;
+
+device implementation actuator.impl
+end actuator.impl;
+	
+----------Sensor-------------
+device sensor
+features
+ wl : in data port WLCS_Types::WaterLevel;
+ sw : out data port WLCS_Types::SensorValue;
+end sensor;
+
+device implementation sensor.impl
+end sensor.impl;
+
+end WLCS;

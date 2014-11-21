@@ -1,0 +1,7 @@
+property set WLCS_Properties is
+
+with  AADL_Project;
+Tolerance : aadlreal => 0.5 applies to (all) ;
+Filling_Rate : aadlreal => 1.0 applies to (all);
+Draining_Rate : aadlreal => 1.0 applies to (all);
+end WLCS_Properties;
